@@ -1,6 +1,7 @@
 package com.authenticate.demo.user;
 
 import com.authenticate.demo.user.dto.AuthDTO;
+import com.authenticate.demo.user.dto.CreateUserDTO;
 import com.authenticate.demo.user.entity.User;
 import com.authenticate.demo.user.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class AuthController {
     public User signin(@RequestBody AuthDTO credentials){
         User user = authSerce.auth(credentials);
         return user;
+    }
+
+    public User signup(@RequestBody CreateUserDTO user) {
+            User newUser = authSerce.createUser(user);
+            return newUser;
     }
 }

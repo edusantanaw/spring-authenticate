@@ -2,6 +2,7 @@ package com.authenticate.demo.user.service;
 
 import com.authenticate.demo.user.UserRepository;
 import com.authenticate.demo.user.dto.AuthDTO;
+import com.authenticate.demo.user.dto.CreateUserDTO;
 import com.authenticate.demo.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,14 @@ public class AuthService {
         return user;
     }
 
-    public User createUser(){
+    public User createUser(CreateUserDTO user){
+        User newUser = new User(
+                user.firstName,
+                user.lastName,
+                user.email,
+                user.password);
 
-        return new User();
+        userRepository.save(newUser);
+        return newUser;
     }
 }
