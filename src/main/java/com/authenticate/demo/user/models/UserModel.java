@@ -1,16 +1,13 @@
-package com.authenticate.demo.user.entity;
+package com.authenticate.demo.user.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserModel  {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column
     private String firstName;
@@ -21,14 +18,14 @@ public class User {
     @Column
     private String password;
 
-    public User(){}
-    public User(String firstName, String lastName, String email, String password) {
+    public UserModel(){}
+    public UserModel(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.id = UUID.randomUUID();
     }
+
 
     public UUID getId() {
         return id;
@@ -58,10 +55,7 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
+    public String getPass(){ return this.password;}
     public void setPassword(String password) {
         this.password = password;
     }

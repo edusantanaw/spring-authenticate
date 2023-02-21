@@ -2,26 +2,27 @@ package com.authenticate.demo.user;
 
 import com.authenticate.demo.user.dto.AuthDTO;
 import com.authenticate.demo.user.dto.CreateUserDTO;
-import com.authenticate.demo.user.entity.User;
+import com.authenticate.demo.user.models.UserModel;
 import com.authenticate.demo.user.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/api/auth")
+@RestController
+@RequestMapping("/api")
 public class AuthController {
-
     @Autowired
-    private AuthService authSerce;
+     AuthService authService;
     @PostMapping("/signin")
-    public User signin(@RequestBody AuthDTO credentials){
-        User user = authSerce.auth(credentials);
+    public UserModel signin(@RequestBody AuthDTO credentials){
+        UserModel user = authService.auth(credentials);
         return user;
     }
 
-    public User signup(@RequestBody CreateUserDTO user) {
-            User newUser = authSerce.createUser(user);
+    @PostMapping("/signup")
+    public UserModel signup(@RequestBody CreateUserDTO user) {
+            if(user.password != user.confirmPassword)
+                throw new Error("Password must be equals!");
+            UserModel newUser = authService.createUser(user);
             return newUser;
     }
 }

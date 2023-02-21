@@ -1,10 +1,12 @@
 package com.authenticate.demo.user;
 
-import com.authenticate.demo.user.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import com.authenticate.demo.user.models.UserModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface UserRepository extends CrudRepository<User, UUID> {
-     User findByEmail(String email);
+@Repository
+public interface UserRepository extends JpaRepository<UserModel, UUID> {
+     UserModel findByEmail(String email);
 }

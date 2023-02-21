@@ -11,7 +11,6 @@ public class CreateUserDTO {
     @NotBlank
     @Size(min = 3, max = 15)
     public String lastName;
-
     @NotBlank
     @Email
     public String email;

@@ -3,32 +3,29 @@ package com.authenticate.demo.user.service;
 import com.authenticate.demo.user.UserRepository;
 import com.authenticate.demo.user.dto.AuthDTO;
 import com.authenticate.demo.user.dto.CreateUserDTO;
-import com.authenticate.demo.user.entity.User;
+import com.authenticate.demo.user.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthService {
     @Autowired()
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
-    public User auth(AuthDTO credentials){
-        User user = userRepository.findByEmail(credentials.email);
+    public UserModel auth(AuthDTO credentials){
+        UserModel user = userRepository.findByEmail(credentials.email);
         if(user == null){
             throw  new Error("User not exists");
         }
         return user;
     }
 
-    public User createUser(CreateUserDTO user){
-        User newUser = new User(
+    public UserModel createUser(CreateUserDTO user){
+        UserModel newUser = new UserModel(
                 user.firstName,
                 user.lastName,
                 user.email,
                 user.password);
-
         userRepository.save(newUser);
         return newUser;
     }
