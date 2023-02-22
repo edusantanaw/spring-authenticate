@@ -7,10 +7,7 @@ import jakarta.validation.constraints.Size;
 public class CreateUserDTO {
     @NotBlank
     @Size(min = 3, max = 15)
-    public String firstName;
-    @NotBlank
-    @Size(min = 3, max = 15)
-    public String lastName;
+    public String username;
     @NotBlank
     @Email
     public String email;

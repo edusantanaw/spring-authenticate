@@ -1,15 +1,18 @@
 package com.authenticate.demo.security;
 
-import com.authenticate.demo.user.models.UserModel;
+import com.authenticate.demo.user.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class UserDetailsSecurity extends UserModel implements UserDetails {
+public class UserDetailsSecurity extends User implements UserDetails, Serializable {
+
+    private  static final long serialVersionUID = 1L;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.getRoles();
     }
 
     @Override
@@ -19,7 +22,7 @@ public class UserDetailsSecurity extends UserModel implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.getFirstName();
+        return this.getUserByname();
     }
 
     @Override
